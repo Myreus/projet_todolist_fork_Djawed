@@ -18,12 +18,12 @@ DATABASE_NAME=todolist
 DATABASE_HOST=localhost:3306
 ```
 
-## 2 démarrer le projet
+## 3 démarrer le projet
 ```sh
 php -S 127.0.0.1:8000 -t public
 ```
 
-## 3 Créer le fichier .env et le remplir avec (à adapter si besoin)
+## 4 Créer le fichier .env et le remplir avec (à adapter si besoin)
 ```sh
 # variable d'environnement
 DATABASE_USERNAME=root
@@ -32,7 +32,7 @@ DATABASE_NAME=todolist
 DATABASE_HOST=localhost:3306
 ```
 
-## 4 sert à retrouver le fichier .env (faire une recherche ?)
+## 5 sert à retrouver le fichier .env (faire une recherche ?)
 ```sh
 composer require vlucas/phpdotenv
 ```
