@@ -18,6 +18,7 @@ class Account
     {
         $this->email = $email;
         $this->password = $password;
+        $this->image = "profil.png";
     }
 
 
@@ -26,9 +27,10 @@ class Account
         return $this->id;
     }
 
-    public function setId(?int $id): void 
+    public function setId(?int $id): self 
     {
         $this->id = $id;
+        return $this;
     }
 
     public function getFirstname(): ?string
@@ -36,9 +38,10 @@ class Account
         return $this->firstname;
     }
 
-    public function setFirstname(?string $firstname): void 
+    public function setFirstname(?string $firstname): self 
     {
         $this->firstname = $firstname;
+        return $this;
     }
 
     public function getLastname(): ?string
@@ -46,9 +49,10 @@ class Account
         return $this->lastname;
     }
 
-    public function setLastname(?string $lastname): void 
+    public function setLastname(?string $lastname): self
     {
         $this->lastname = $lastname;
+        return $this;
     }
 
     public function getEmail(): ?string
@@ -56,9 +60,10 @@ class Account
         return $this->email;
     }
 
-    public function setEmail(?string $email): void 
+    public function setEmail(?string $email): self
     {
         $this->email = $email;
+        return $this;
     }
 
     public function getPassword(): ?string
@@ -66,9 +71,10 @@ class Account
         return $this->password;
     }
 
-    public function setPassword(?string $password): void 
+    public function setPassword(?string $password): self 
     {
         $this->password = $password;
+        return $this;
     }
 
     public function getImage(): ?string
@@ -76,9 +82,10 @@ class Account
         return $this->image;
     }
 
-    public function setImage(?string $image): void 
+    public function setImage(?string $image): self
     {
         $this->image = $image;
+        return $this;
     }
 
     //Méthodes

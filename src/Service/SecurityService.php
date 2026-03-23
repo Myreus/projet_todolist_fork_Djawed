@@ -1,0 +1,63 @@
+<?php
+
+namespace App\Service;
+
+use App\Entity\Account;
+use App\Repository\AccountRepository;
+use App\Utils\Tools;
+
+class SecurityService
+{
+    private AccountRepository $accountRepository;
+
+    public function __construct()
+    {
+        $this->accountRepository = new AccountRepository();
+    }
+
+    public function register(array $account): string 
+    {
+        //1 vérifier si les champs sont remplis
+        if (
+            empty($account["firstname"]) || 
+            empty($account["lastname"]) ||
+            empty($account["email"]) ||
+            empty($account["password"]) ||
+            empty($account["confirm_password"])
+        ) {
+            return "Veuillez remplir tous les champs du formulaire";
+        }
+
+        //2 valider les formats
+        if (!filter_var($account["email"], FILTER_VALIDATE_EMAIL)) {
+            return "Veuillez saisir un email valide";
+        }
+
+        //3 vérifier si les 2 mots de passe sont identiques
+        if ($account["password"] != $account["confirm_password"]) {
+            return "Les 2 mots de passe ne sont pas identiques";
+        }
+
+        //4 nettoyer les données
+        Tools::sanitize_array($account);
+
+        //5 vérifier si le compte existe déja
+        if ($this->accountRepository->isAccountExistsByEmail($account["email"])) {
+            return "Le compte existe déja";
+        }
+
+        //6 Créer un objet Account
+        $user = new Account($account["email"], $account["password"]);
+        $user
+            ->setFirstname($account["firstname"])
+            ->setLastname($account["lastname"]);
+        
+        //7 hasher le password
+        $user->hashPassword();
+
+        //8 ajouter le compte
+        $this->accountRepository->addAccount($user);
+
+        return "Le compte : " . $user->getEmail() . " a été ajouté en BDD";
+    }
+}
