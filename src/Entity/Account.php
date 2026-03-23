@@ -7,13 +7,13 @@ class Account
     private ?int $id;
     private ?string $firstname;
     private ?string $lastname;
-    private string $email;
-    private string $password;
+    private ?string $email;
+    private ?string $password;
     private ?string $image;
 
     public function __construct(
-        string $email,
-        string $password
+        ?string $email = null,
+        ?string $password = null
     )
     {
         $this->email = $email;
@@ -51,22 +51,22 @@ class Account
         $this->lastname = $lastname;
     }
 
-    public function getEmail(): string
+    public function getEmail(): ?string
     {
         return $this->email;
     }
 
-    public function setEmail(string $email): void 
+    public function setEmail(?string $email): void 
     {
         $this->email = $email;
     }
 
-    public function getPassword(): string
+    public function getPassword(): ?string
     {
         return $this->password;
     }
 
-    public function setPassword(string $password): void 
+    public function setPassword(?string $password): void 
     {
         $this->password = $password;
     }
