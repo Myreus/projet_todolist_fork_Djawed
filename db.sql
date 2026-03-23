@@ -1,0 +1,64 @@
+CREATE DATABASE IF NOT EXISTS todolist CHARSET utf8mb4;
+
+USE todolist;
+
+CREATE TABLE IF NOT EXISTS category(
+id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+category_name VARCHAR(50) UNIQUE NOT NULL
+)ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS `right`(
+id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+right_name VARCHAR(50) UNIQUE NOT NULL
+)ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS `account`(
+id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+firstname VARCHAR(50) NOT NULL,
+lastname VARCHAR(50) NOT NULL,
+email VARCHAR(50) UNIQUE NOT NULL,
+password VARCHAR(100) NOT NULL,
+image VARCHAR(255) DEFAULT "profil.png" NOT NULL,
+right_id INT DEFAULT 1 NOT NULL
+)ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS task(
+id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+title VARCHAR(50) NOT NULL,
+`description` VARCHAR(255) NOT NULL,
+created_at DATETIME NOT NULL,
+updated_at DATETIME NOT NULL,
+finish_on DATETIME,
+`status` BOOL DEFAULT 1 NOT NULL,
+`repeat` VARCHAR(50),
+account_id INT NOT NULL
+)ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS task_category(
+task_id INT NOT NULL,
+category_id INT NOT NULL,
+PRIMARY KEY(task_id, category_id)
+)ENGINE=InnoDB;
+
+ALTER TABLE `account`
+ADD CONSTRAINT fk_possess_right
+FOREIGN KEY(right_id)
+REFERENCES `right`(id);
+
+ALTER TABLE task
+ADD CONSTRAINT fk_create_account
+FOREIGN KEY(account_id)
+REFERENCES `account`(id)
+ON DELETE CASCADE;
+
+ALTER TABLE task_category
+ADD CONSTRAINT fk_detail_category
+FOREIGN KEY(category_id)
+REFERENCES category (id);
+
+ALTER TABLE task_category
+ADD CONSTRAINT fk_detail_task
+FOREIGN KEY(task_id)
+REFERENCES task (id);
+
+INSERT INTO `right`(right_name) VALUES ("ROLE_USER"), ("ROLE_ADMIN");
