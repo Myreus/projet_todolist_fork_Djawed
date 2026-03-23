@@ -6,5 +6,6 @@
     <li><a href="/">Accueil</a></li>
     <li><a href="/category/all">Categories</a></li>
     <li><a href="/category/new">Ajout Category</a></li>
+    <li><a href="/register">Inscription</a></li>
   </ul>
 </nav>

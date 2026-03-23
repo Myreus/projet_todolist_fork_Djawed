@@ -23,7 +23,7 @@ class SecurityService
             empty($account["lastname"]) ||
             empty($account["email"]) ||
             empty($account["password"]) ||
-            empty($account["confirm_password"])
+            empty($account["confirm-password"])
         ) {
             return "Veuillez remplir tous les champs du formulaire";
         }
@@ -34,7 +34,7 @@ class SecurityService
         }
 
         //3 vérifier si les 2 mots de passe sont identiques
-        if ($account["password"] != $account["confirm_password"]) {
+        if ($account["password"] != $account["confirm-password"]) {
             return "Les 2 mots de passe ne sont pas identiques";
         }
 

@@ -13,10 +13,13 @@ $path = isset($url['path']) ? $url['path'] : '/';
 //Importer les controllers
 use App\Controller\HomeController;
 use App\Controller\CategoryController;
+use App\Controller\SecurityController;
 
 //instancier les controllers
 $homeController = new HomeController();
 $categoryController = new CategoryController();
+$securityController = new SecurityController();
+
 //Routeur (test)
 switch ($path) {
     case '/':
@@ -27,6 +30,15 @@ switch ($path) {
         break;
     case '/category/all':
         $categoryController->showAllCategory();
+        break;
+    case '/register':
+        $securityController->createAccount();
+        break;
+    case '/login':
+        $securityController->createAccount();
+        break;
+    case '/logout':
+        $securityController->createAccount();
         break;
     default:
         echo "404 la page n'existe pas";
