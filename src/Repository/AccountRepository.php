@@ -40,12 +40,48 @@ class AccountRepository
 
     public function isAccountExistsByEmail(string $email): bool 
     {
-        return true;
+        try {
+            //1 Ecrire la requête SQL
+            $sql = "SELECT account.email FROM account WHERE account.email = ?";
+            //2 Préparation de la requête
+            $req = $this->connect->prepare($sql);
+            //3 Assignation des paramètres
+            $req->bindParam(1, $email,\PDO::PARAM_STR);
+            //4 Exécuter la requête (rangé dans la variable $req)
+            $req->execute();
+            //5 Ranger le résultat dans un tableau associatif
+            $account = $req->fetch(\PDO::FETCH_ASSOC);
+            //6 Logique
+            if (empty($account)){
+                return false;
+            } else {
+                return true;
+            }
+            
+        } catch(\PDOException $e) {
+            return false;
+        }
     }
 
     public function findAccountByEmail(string $email): ?Account 
     {
-        return null;
+        try {
+            //1 Ecrire la requête SQL
+            $sql = "SELECT a.id, a.firstname, a.lastname, a.email, a.password, a.image, a.right_id FROM account AS a WHERE account.email = ?";
+            //2 Préparation de la requête
+            $req = $this->connect->prepare($sql);
+            //3 Assignation des paramètres
+            $req->bindParam(1, $email,\PDO::PARAM_STR);
+            //4 Exécuter la requête (rangé dans la variable $req)
+            $req->execute();
+            //5 Ranger le résultat dans un tableau associatif
+            $account = $req->fetch(\PDO::FETCH_ASSOC);
+            //6 Retourne le résultat
+            return $account;
+            
+        } catch(\PDOException $e) {
+            return null;
+        }
     }
 }
 
