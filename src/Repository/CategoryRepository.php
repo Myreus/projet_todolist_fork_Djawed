@@ -63,10 +63,28 @@ class CategoryRepository
             $req = $this->connect->prepare($sql);
             //3 Exécuter la requête
             $req->execute();
-            //4 Récupérer la réponse
-            $req->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, Category::class);
-            $categories = $req->fetchAll();
+            //4 Récupérer la réponse (tableau indexé contenant des tableaux associatifs)
+            $categories = $req->fetchAll(\PDO::FETCH_ASSOC);
+            //5 tableau vide (qui va contenir les objets Category)
+            $arrayCategories = [];
+            //6 Parcours la réponse FetchAll
+            foreach ($categories as $category) {
+                //7 hydrater le tableau asso en objet Category
+                $arrayCategories[] = $this->hydrateCategory($category); 
+            }
         } catch(\PDOException $e) {}
-        return $categories;
+        return $arrayCategories;
+    }
+
+    /**
+     * Méthode pour hydrater un tableau associatif en objet Category
+     * @param array $row ligne d'enregistrement (Tableau associatif)
+     * @return Category retourne un objet Category
+     */
+    public function hydrateCategory(array $row): Category
+    {
+        $cat = new Category($row["name"]);
+        $cat->setId($row["id"]);
+        return $cat;
     }
 }
