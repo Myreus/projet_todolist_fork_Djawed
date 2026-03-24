@@ -1,6 +1,9 @@
 <?php
 
 include '../vendor/autoload.php';
+//démarrage de la session
+session_start();
+
 //Charger les variables d'environnement
 $dotenv = Dotenv\Dotenv::createImmutable("../");
 $dotenv->load();
@@ -35,10 +38,10 @@ switch ($path) {
         $securityController->createAccount();
         break;
     case '/login':
-        $securityController->createAccount();
+        $securityController->connexion();
         break;
     case '/logout':
-        $securityController->createAccount();
+        $securityController->deconnexion();
         break;
     default:
         echo "404 la page n'existe pas";
