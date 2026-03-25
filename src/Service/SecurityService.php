@@ -104,7 +104,8 @@ class SecurityService
         $_SESSION["email"] = $user->getEmail();
         $_SESSION["firstname"] = $user->getFirstname();
         $_SESSION["lastname"] = $user->getLastname();
-
+        $_SESSION["id"] = $user->getId();
+        
         return "Vous etes connecté";
     }
 }

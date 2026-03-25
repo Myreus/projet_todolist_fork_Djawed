@@ -17,11 +17,13 @@ $path = isset($url['path']) ? $url['path'] : '/';
 use App\Controller\HomeController;
 use App\Controller\CategoryController;
 use App\Controller\SecurityController;
+use App\Controller\TaskController;
 
 //instancier les controllers
 $homeController = new HomeController();
 $categoryController = new CategoryController();
 $securityController = new SecurityController();
+$taskController = new TaskController();
 
 //Routeur (test)
 switch ($path) {
@@ -42,6 +44,12 @@ switch ($path) {
         break;
     case '/logout':
         $securityController->deconnexion();
+        break;
+    case '/task/new':
+        $taskController->createTask();
+        break;
+    case '/task/all':
+        $taskController->showAllTaskByAccount();
         break;
     default:
         echo "404 la page n'existe pas";

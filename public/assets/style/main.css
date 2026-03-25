@@ -1,0 +1,20 @@
+.pill-button {
+    background-color: #0f85de;
+    border: none;
+    color: rgb(255, 255, 255);
+    padding: 6px 12px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 4px 2px;
+    cursor:default;
+    border-radius: 20px;
+    max-width: 200px;
+}
+.categories{
+    display: flex;
+    align-items:start;
+}
+/* .button:hover {
+  background-color: #0f85de;
+} */
